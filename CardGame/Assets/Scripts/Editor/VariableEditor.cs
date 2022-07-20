@@ -29,6 +29,16 @@ namespace Variable
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.PropertyField(runtimeValue);
             EditorGUI.EndDisabledGroup();
+
+            EditorGUILayout.PropertyField(runtimeMode);
+            EditorGUILayout.PropertyField(persistentMode);
+
+            EditorGUI.BeginDisabledGroup(persistentMode.boolValue == true);
+            if (GUILayout.Button("Save to initial value"))
+            { (target as BaseVariable).SaveToInitialValue(); }
+            EditorGUI.EndDisabledGroup();
+            if (target)
+            { serializedObject.ApplyModifiedProperties(); }
         }
     }
 }
